@@ -1,0 +1,320 @@
+"""
+WebUI_jll Local Library Support
+
+This module provides functionality to use locally extracted WebUI libraries
+instead of downloading from nightly builds. This is useful when you need
+access to functions that aren't in the standard releases (like frameless
+window API).
+
+# Usage
+
+```julia
+using WebUI_jll
+
+# Use local library instead of downloading
+use_local_library()
+
+# Now the regular WebUI_jll functions will use the local library
+lib_path = webui_path()
+
+# Or manually specify the local path
+use_local_library("/path/to/webui-2.dll")
+
+# Switch back to downloaded version
+use_downloaded_library()
+```
+
+# Key Functions
+
+- `use_local_library([path])` - Switch to local library
+- `use_downloaded_library()` - Switch back to downloaded version
+- `is_using_local()` - Check which mode is active
+- `verify_local_library(path)` - Verify local library has required functions
+
+"""
+module WebUI_jll_Local
+
+using Libdl
+
+# Track whether we're using local or downloaded library
+const _use_local = Ref{Bool}(false)
+const _local_lib_path = Ref{String}("")
+
+# Default local library directory (relative to this module)
+const LOCAL_LIB_DIR = joinpath(@__DIR__, "..", "..", "webui-windows-msvc-x64", "webui-windows-msvc-x64")
+
+"""
+    find_local_library()
+
+Search for the local WebUI library in common locations.
+"""
+function find_local_library()
+    # Default locations to search
+    search_paths = [
+        LOCAL_LIB_DIR,
+        joinpath(LOCAL_LIB_DIR, "webui-2.dll"),
+        joinpath(LOCAL_LIB_DIR, "..", "webui-2.dll"),
+        joinpath(homedir(), ".cache", "webui_jll", "webui-windows-msvc-x64", "webui-2.dll"),
+    ]
+
+    # Check for environment variable override
+    env_path = get(ENV, "WEBUI_LOCAL_PATH", "")
+    if !isempty(env_path)
+        pushfirst!(search_paths, env_path)
+    end
+
+    for path in search_paths
+        if isfile(path)
+            return path
+        elseif isdir(path)
+            # Look for DLL inside directory
+            dll_path = joinpath(path, "webui-2.dll")
+            if isfile(dll_path)
+                return dll_path
+            end
+        end
+    end
+
+    return ""
+end
+
+"""
+    verify_local_library(path::String)
+
+Verify that the local library has the required functions.
+Returns tuple of (is_valid, missing_functions).
+"""
+function verify_local_library(path::String)
+    if !isfile(path)
+        return false, ["Library file not found: $path"]
+    end
+
+    handle = try
+        dlopen(path)
+    catch e
+        return false, ["Failed to load library: $e"]
+    end
+
+    # Functions that should be available for full functionality
+    required_functions = [
+        # Core functions (must have)
+        "webui_new_window",
+        "webui_show",
+        "webui_bind",
+        "webui_wait",
+        "webui_exit",
+        "webui_close",
+        "webui_set_size",
+    ]
+
+    # Frameless window functions (desired)
+    frameless_functions = [
+        "webui_set_frameless",
+        "webui_set_transparent",
+        "webui_set_center",
+        "webui_minimize",
+        "webui_maximize",
+        "webui_set_resizable",
+    ]
+
+    all_required = vcat(required_functions, frameless_functions)
+
+    missing = String[]
+    for func in all_required
+        try
+            dlsym(handle, Symbol(func))
+        catch
+            push!(missing, func)
+        end
+    end
+
+    dlclose(handle)
+
+    if !isempty(missing)
+        return false, missing
+    end
+
+    return true, String[]
+end
+
+"""
+    use_local_library(path::String = "")
+
+Switch to using a local WebUI library.
+If path is not specified, searches common locations.
+
+# Example
+```julia
+use_local_library()  # Uses default location
+use_local_library("/path/to/my/webui-2.dll")  # Custom path
+```
+"""
+function use_local_library(path::String = "")
+    if isempty(path)
+        path = find_local_library()
+        if isempty(path)
+            error("Could not find local WebUI library. Specify path explicitly or set WEBUI_LOCAL_PATH environment variable.")
+        end
+    end
+
+    if !isfile(path)
+        error("Local library not found: $path")
+    end
+
+    # Verify the library has required functions
+    is_valid, missing = verify_local_library(path)
+    if !is_valid
+        @warn "Local library is missing some functions: $missing"
+    else
+        @info "Local library validated successfully"
+    end
+
+    _use_local[] = true
+    _local_lib_path[] = path
+
+    @info "Switched to local WebUI library" path=path
+
+    return path
+end
+
+"""
+    use_downloaded_library()
+
+Switch back to using the downloaded nightly build.
+"""
+function use_downloaded_library()
+    _use_local[] = false
+    _local_lib_path[] = ""
+    @info "Switched to downloaded WebUI library"
+end
+
+"""
+    is_using_local()
+
+Returns true if currently using local library.
+"""
+function is_using_local()
+    return _use_local[]
+end
+
+"""
+    get_local_path()
+
+Returns the current local library path (empty if not using local).
+"""
+function get_local_path()
+    return _local_lib_path[]
+end
+
+"""
+    get_active_lib_path()
+
+Returns the path to the currently active WebUI library,
+whether local or downloaded.
+"""
+function get_active_lib_path()
+    if _use_local[] && !isempty(_local_lib_path[])
+        return _local_lib_path[]
+    end
+    return ""  # Signal to use fallback
+end
+
+"""
+    print_local_status()
+
+Print information about the local library configuration.
+"""
+function print_local_status()
+    println()
+    println("="^60)
+    println("WebUI Local Library Status")
+    println("="^60)
+    println()
+
+    if _use_local[]
+        println("Mode: LOCAL")
+        println("Path: $(get_local_path())")
+
+        path = get_local_path()
+        if !isempty(path)
+            is_valid, missing = verify_local_library(path)
+            if is_valid
+                println("Status: ✓ All required functions available")
+            else
+                println("Status: ⚠️  Missing functions:")
+                for m in missing
+                    println("  - $m")
+                end
+            end
+        end
+    else
+        println("Mode: DOWNLOADED")
+        println("Using standard nightly build from GitHub")
+    end
+
+    println()
+end
+
+"""
+    setup_frameless_support()
+
+One-time setup to configure local library for frameless windows.
+Finds and validates the local library, then switches to use it.
+"""
+function setup_frameless_support()
+    println()
+    println("Setting up local WebUI library for frameless support...")
+    println()
+
+    path = find_local_library()
+
+    if isempty(path)
+        println("❌ Could not find local WebUI library.")
+        println()
+        println("To fix this:")
+        println("1. Extract the WebUI upstream library to:")
+        println("   $(LOCAL_LIB_DIR)")
+        println("2. Or set WEBUI_LOCAL_PATH environment variable")
+        println("3. Or call use_local_library(path) with explicit path")
+        return false
+    end
+
+    println("Found local library: $path")
+    println()
+
+    is_valid, missing = verify_local_library(path)
+
+    if is_valid
+        println("✓ Library validated successfully!")
+        println()
+        println("Frameless window functions available:")
+        for func in ["webui_set_frameless", "webui_set_transparent",
+                     "webui_set_center", "webui_minimize", "webui_maximize",
+                     "webui_set_resizable"]
+            println("  - $func")
+        end
+        println()
+
+        use_local_library(path)
+        return true
+    else
+        println("⚠️  Library is missing some functions:")
+        for m in missing
+            println("  - $m")
+        end
+        return false
+    end
+end
+
+# Export public functions
+export use_local_library,
+       use_downloaded_library,
+       is_using_local,
+       get_local_path,
+       get_active_lib_path,
+       verify_local_library,
+       find_local_library,
+       print_local_status,
+       setup_frameless_support
+
+end  # module WebUI_jll_Local
