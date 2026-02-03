@@ -1,0 +1,8 @@
+[general]
+library_name = "webui"
+output_file_path = "../src/LibWebUI.jl"
+module_name = "LibWebUI"
+jll_pkg_name = "WebUI_jll"
+
+[codegen]
+use_ccall_macro = true

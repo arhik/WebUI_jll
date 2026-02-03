@@ -1,0 +1,27 @@
+# Generated artifacts and downloaded files
+gen/work/
+gen/artifacts/
+*.zip
+*.tar.gz
+
+# Julia package files
+*.jl.cov
+*.jl.*.cov
+*.jl.mem
+Manifest.toml
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Temporary files
+tmp/
+temp/
+*.tmp

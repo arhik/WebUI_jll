@@ -1,18 +1,16 @@
 name = "WebUI_jll"
 uuid = "f70f86da-aae1-4976-8723-c6a049878ee8"
-version = "0.1.0"
+version = "2.5.0+0"
 authors = ["Arhik <arhik23@gmail.com>"]
-description = "Julia package for WebUI 2.5.0-beta.3 library binaries (downloaded at runtime)"
+description = "Julia package for WebUI library binaries using the artifact system"
 
 [deps]
-Dates = "ade2ca70-3891-5945-98fb-dc099432e06a"
-Downloads = "f43a241f-c20a-4ad4-852c-f6b1247861c6"
+Artifacts = "56f22d72-fd6d-98f1-02f0-08ddc0907c33"
+Inflate = "d25df0c9-e2be-5dd7-82c8-3ad0b3e990b9"
 Libdl = "8f399da3-3557-5675-b5ff-fb832c97cbdb"
-SHA = "ea8e919c-243c-51af-8825-aaa63cd721ce"
-Serialization = "9e88b42a-f829-5b0c-bbe9-9e923198166b"
+Reexport = "189a3867-3050-52da-a836-e630ba90ab69"
 
 [compat]
-Dates = "1.11.0"
-Downloads = "1.7.0"
-SHA = "0.7.0"
-Serialization = "1.11.0"
+Inflate = "0.1.5"
+Reexport = "1.0"
+julia = "1.6.0"

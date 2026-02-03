@@ -1,0 +1,54 @@
+[[webui]]
+arch = "aarch64"
+git-tree-sha1 = "e6e6f4d9ee766e4db21a7dccbb67c271dcbc0342"
+os = "linux"
+
+	[[webui.download]]
+	sha256 = "4dbe015c070d56a8afab03b503a2be9f94b4ec032e56ab9aaf5f69eb2a5936d0"
+	url = "https://github.com/JuliaBinaryWrappers/WebUI_jll.jl/releases/download/WebUI-2.5.0-beta.3+0/webui.2.5.0-beta.3.aarch64-linux.tar.gz"
+
+[[webui]]
+arch = "x86_64"
+git-tree-sha1 = "53ee91d27fc5568c96191c06e44a9be26cae89a0"
+os = "linux"
+
+	[[webui.download]]
+	sha256 = "45f9148de98cb6f8093762edb6a7947722c5c14f5b234e9de26887f59340a3dd"
+	url = "https://github.com/JuliaBinaryWrappers/WebUI_jll.jl/releases/download/WebUI-2.5.0-beta.3+0/webui.2.5.0-beta.3.x86_64-linux.tar.gz"
+
+[[webui]]
+arch = "armv7l"
+git-tree-sha1 = "495fef467a9126ddaa2dcf19c04f6ef8dd278afe"
+os = "linux"
+
+	[[webui.download]]
+	sha256 = "581816866741db8e59517a9f4b1c97851171698aa63dfc5ab6890d037204a19a"
+	url = "https://github.com/JuliaBinaryWrappers/WebUI_jll.jl/releases/download/WebUI-2.5.0-beta.3+0/webui.2.5.0-beta.3.armv7l-linux.tar.gz"
+
+[[webui]]
+arch = "aarch64"
+git-tree-sha1 = "d6f9c97d91c1e35e4232bf58d91a9c5d6ddc7c3a"
+os = "macos"
+
+	[[webui.download]]
+	sha256 = "cf7e3f6f21b4c54cb451ebf9f0a257ca58d9d7fd710d8c5008d91ed49c60b120"
+	url = "https://github.com/JuliaBinaryWrappers/WebUI_jll.jl/releases/download/WebUI-2.5.0-beta.3+0/webui.2.5.0-beta.3.aarch64-macos.tar.gz"
+
+[[webui]]
+arch = "x86_64"
+git-tree-sha1 = "3c18e274ab7d8cadea8a1ec9df2fb1dc4a802d66"
+os = "macos"
+
+	[[webui.download]]
+	sha256 = "f595fda015554a8cc40db6a360ce20856e0fdadb54b2f5711ca8370a0c112ba2"
+	url = "https://github.com/JuliaBinaryWrappers/WebUI_jll.jl/releases/download/WebUI-2.5.0-beta.3+0/webui.2.5.0-beta.3.x86_64-macos.tar.gz"
+
+[[webui]]
+arch = "x86_64"
+git-tree-sha1 = "ceafb9614dcaa2261cd5e032286b905410587ad8"
+os = "windows"
+
+	[[webui.download]]
+	sha256 = "a021e519ecdd825e678fd5489d81eb9eb84e211ced276a370696e10b4822ada4"
+	url = "https://github.com/JuliaBinaryWrappers/WebUI_jll.jl/releases/download/WebUI-2.5.0-beta.3+0/webui.2.5.0-beta.3.x86_64-windows.tar.gz"
+
