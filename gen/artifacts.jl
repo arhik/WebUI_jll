@@ -12,7 +12,7 @@ version = "v0.1.0"
 kernels = ["linux", "macos", "windows"]
 archs = ["aarch64", "x86_64", "armv7l", "i686"]
 
-releaseType = "release"
+releaseType = "pre-release"
 upstreamVersion = "2.5.0-beta.3"
 
 io = IOBuffer()
@@ -34,7 +34,7 @@ function writeIO(io, arch, kernel, sha1, sha256, filename, url)
 	)
 end
 
-remoteurl = "https://github.com/arhik/WebUI_jll/releases/download/$(version)"
+remoteurl = "https://github.com/arhik/WebUI_jll/releases/download/$(version)-$(releaseType)/"
 
 function generateArtifacts()
 	for kernel in kernels
