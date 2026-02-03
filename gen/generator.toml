@@ -1,9 +1,16 @@
 [general]
-library_name = "WebUI"
+library_name = "libWebUI"
 output_file_path = "../src/LibWebUI.jl"
 module_name = "LibWebUI"
 jll_pkg_name = "WebUI_jll"
 prologue_file_path = "./prologue.jl"
+output_ignorelist = [
+	"WEBUI_GET_CURRENT_DIR",
+	"WEBUI_FILE_EXIST",
+	"WEBUI_POPEN",
+	"WEBUI_PCLOSE",
+	"WEBUI_MAX_PATH",
+]
 
 [codegen]
 use_ccall_macro = true

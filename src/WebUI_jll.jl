@@ -8,7 +8,7 @@ include("LibWebUI.jl")
 
 function __init__()
     if Sys.iswindows()
-        libpath = joinpath(artifact"WebUI", "lib", "webui-2")
+        libpath = joinpath(artifact"webui", "lib", "webui-2.dll")
         chmod(libpath, filemode(libpath) | 0o755)
     end
 end

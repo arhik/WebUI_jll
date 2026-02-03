@@ -9,7 +9,7 @@ const UINT64_MAX = 0xffffffffffffffff
 
 artifact_toml = joinpath(@__DIR__, "..", "Artifacts.toml")
 
-webui_hash = artifact_hash("WebUI", artifact_toml)
+webui_hash = artifact_hash("webui", artifact_toml)
 
 webuilibpath = artifact_path(webui_hash)
 resourceName = "webui-2"
