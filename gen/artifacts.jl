@@ -21,12 +21,12 @@ function writeIO(io, arch, kernel, sha1, sha256, filename, url)
 	write(
 		io,
 		"""
-		[[webui]]
+		[[WebUI]]
 		arch = "$arch"
 		git-tree-sha1 = "$sha1"
 		os = "$kernel"
 
-			[[webui.download]]
+			[[WebUI.download]]
 			sha256 = "$sha256"
 			url = "$(url)/$(filename)"
 

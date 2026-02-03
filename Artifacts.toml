@@ -1,54 +1,54 @@
-[[webui]]
+[[WebUI]]
 arch = "aarch64"
 git-tree-sha1 = "e6e6f4d9ee766e4db21a7dccbb67c271dcbc0342"
 os = "linux"
 
-	[[webui.download]]
-	sha256 = "bae3b1a99a4402d50123b8746e5470bcbff97d9a1a0b546a243202ea491f53e2"
+	[[WebUI.download]]
+	sha256 = "8252c7d937e1dd4a1da30d675174b959a0d7d8ff7a5a96829a5e364413203cd8"
 	url = "https://github.com/JuliaBinaryWrappers/WebUI_jll.jl/releases/download/WebUI-2.5.0-beta.3+0/webui.2.5.0-beta.3.aarch64-linux.tar.gz"
 
-[[webui]]
+[[WebUI]]
 arch = "x86_64"
 git-tree-sha1 = "53ee91d27fc5568c96191c06e44a9be26cae89a0"
 os = "linux"
 
-	[[webui.download]]
-	sha256 = "1777cc4bf1a5d82a007ea5b79e68e74c5064c02166da03403683863ac7140e04"
+	[[WebUI.download]]
+	sha256 = "b8f4c18ebcf9fb24e2584c02f74f134f334251ce31c7a31df96053828bc6492a"
 	url = "https://github.com/JuliaBinaryWrappers/WebUI_jll.jl/releases/download/WebUI-2.5.0-beta.3+0/webui.2.5.0-beta.3.x86_64-linux.tar.gz"
 
-[[webui]]
+[[WebUI]]
 arch = "armv7l"
 git-tree-sha1 = "495fef467a9126ddaa2dcf19c04f6ef8dd278afe"
 os = "linux"
 
-	[[webui.download]]
-	sha256 = "d9aa6d350f57c43199071a3f2c37ee87d611cdf61bf6143201303bb3b696c939"
+	[[WebUI.download]]
+	sha256 = "144637bc79383f2490f3bf4fbb8fc5621ded0809da605da35770a5dd519d6894"
 	url = "https://github.com/JuliaBinaryWrappers/WebUI_jll.jl/releases/download/WebUI-2.5.0-beta.3+0/webui.2.5.0-beta.3.armv7l-linux.tar.gz"
 
-[[webui]]
+[[WebUI]]
 arch = "aarch64"
 git-tree-sha1 = "d6f9c97d91c1e35e4232bf58d91a9c5d6ddc7c3a"
 os = "macos"
 
-	[[webui.download]]
-	sha256 = "11b1cc1157ac1a341ccc95c03416401b336054c4a804958f2ac9f65c93789aee"
+	[[WebUI.download]]
+	sha256 = "ce54110fcea9941a3bc32b232824a9b822842005fa05e83e879f8652532c7d1f"
 	url = "https://github.com/JuliaBinaryWrappers/WebUI_jll.jl/releases/download/WebUI-2.5.0-beta.3+0/webui.2.5.0-beta.3.aarch64-macos.tar.gz"
 
-[[webui]]
+[[WebUI]]
 arch = "x86_64"
 git-tree-sha1 = "3c18e274ab7d8cadea8a1ec9df2fb1dc4a802d66"
 os = "macos"
 
-	[[webui.download]]
-	sha256 = "426cdda822a118d0ef354fa52d708aef13cad1d094b999240b98024c9fa0f991"
+	[[WebUI.download]]
+	sha256 = "0bd7a12dc699f77542bad101decf61fa250689dea50b50f6cb29ff8129b44ff1"
 	url = "https://github.com/JuliaBinaryWrappers/WebUI_jll.jl/releases/download/WebUI-2.5.0-beta.3+0/webui.2.5.0-beta.3.x86_64-macos.tar.gz"
 
-[[webui]]
+[[WebUI]]
 arch = "x86_64"
 git-tree-sha1 = "ceafb9614dcaa2261cd5e032286b905410587ad8"
 os = "windows"
 
-	[[webui.download]]
-	sha256 = "082fa611c555b6de1746e184a9f97ad2d95cd1a8261504fb73d91053fc9d3bc4"
+	[[WebUI.download]]
+	sha256 = "4424ae3b87054e4f83ec3d039545708a32ac167b4c6d39e46986fceb73e81a14"
 	url = "https://github.com/JuliaBinaryWrappers/WebUI_jll.jl/releases/download/WebUI-2.5.0-beta.3+0/webui.2.5.0-beta.3.x86_64-windows.tar.gz"
 
