@@ -6,7 +6,6 @@ using Reexport
 include("LibWebUI.jl")
 @reexport using .LibWebUI
 
-# const libwebui = dlopen()
 function __init__()
     if Sys.iswindows()
         libpath = joinpath(artifact"webui", "lib", "webui-2.dll")
