@@ -5,6 +5,24 @@ export WebUI_jll
 
 using CEnum: CEnum, @cenum
 
+using Libdl
+using Pkg
+using Pkg.Artifacts
+
+const SIZE_MAX = 2^32
+const UINT16_MAX = 0xffff
+const UINT32_MAX = 0xffffffff
+const UINT64_MAX = 0xffffffffffffffff
+
+artifact_toml = joinpath(@__DIR__, "..", "Artifacts.toml")
+
+webui_hash = artifact_hash("WebUI", artifact_toml)
+
+webuilibpath = artifact_path(webui_hash)
+resourceName = "webui-2"
+const libWebUI = "$webuilibpath/lib/$resourceName.$(Libdl.dlext)" |> normpath
+
+
 @cenum webui_browser::UInt32 begin
     NoBrowser = 0
     AnyBrowser = 1
@@ -64,441 +82,441 @@ end
 end
 
 function webui_new_window()
-    @ccall webui.webui_new_window()::Csize_t
+    @ccall WebUI.webui_new_window()::Csize_t
 end
 
 function webui_new_window_id(window_number)
-    @ccall webui.webui_new_window_id(window_number::Csize_t)::Csize_t
+    @ccall WebUI.webui_new_window_id(window_number::Csize_t)::Csize_t
 end
 
 function webui_get_new_window_id()
-    @ccall webui.webui_get_new_window_id()::Csize_t
+    @ccall WebUI.webui_get_new_window_id()::Csize_t
 end
 
 function webui_bind(window, element, func)
-    @ccall webui.webui_bind(window::Csize_t, element::Ptr{Cchar}, func::Ptr{Cvoid})::Csize_t
+    @ccall WebUI.webui_bind(window::Csize_t, element::Ptr{Cchar}, func::Ptr{Cvoid})::Csize_t
 end
 
 function webui_set_context(window, element, context)
-    @ccall webui.webui_set_context(window::Csize_t, element::Ptr{Cchar}, context::Ptr{Cvoid})::Cvoid
+    @ccall WebUI.webui_set_context(window::Csize_t, element::Ptr{Cchar}, context::Ptr{Cvoid})::Cvoid
 end
 
 function webui_get_context(e)
-    @ccall webui.webui_get_context(e::Ptr{webui_event_t})::Ptr{Cvoid}
+    @ccall WebUI.webui_get_context(e::Ptr{webui_event_t})::Ptr{Cvoid}
 end
 
 function webui_get_best_browser(window)
-    @ccall webui.webui_get_best_browser(window::Csize_t)::Csize_t
+    @ccall WebUI.webui_get_best_browser(window::Csize_t)::Csize_t
 end
 
 function webui_show(window, content)
-    @ccall webui.webui_show(window::Csize_t, content::Ptr{Cchar})::Bool
+    @ccall WebUI.webui_show(window::Csize_t, content::Ptr{Cchar})::Bool
 end
 
 function webui_show_client(e, content)
-    @ccall webui.webui_show_client(e::Ptr{webui_event_t}, content::Ptr{Cchar})::Bool
+    @ccall WebUI.webui_show_client(e::Ptr{webui_event_t}, content::Ptr{Cchar})::Bool
 end
 
 function webui_show_browser(window, content, browser)
-    @ccall webui.webui_show_browser(window::Csize_t, content::Ptr{Cchar}, browser::Csize_t)::Bool
+    @ccall WebUI.webui_show_browser(window::Csize_t, content::Ptr{Cchar}, browser::Csize_t)::Bool
 end
 
 function webui_start_server(window, content)
-    @ccall webui.webui_start_server(window::Csize_t, content::Ptr{Cchar})::Ptr{Cchar}
+    @ccall WebUI.webui_start_server(window::Csize_t, content::Ptr{Cchar})::Ptr{Cchar}
 end
 
 function webui_show_wv(window, content)
-    @ccall webui.webui_show_wv(window::Csize_t, content::Ptr{Cchar})::Bool
+    @ccall WebUI.webui_show_wv(window::Csize_t, content::Ptr{Cchar})::Bool
 end
 
 function webui_set_kiosk(window, status)
-    @ccall webui.webui_set_kiosk(window::Csize_t, status::Bool)::Cvoid
+    @ccall WebUI.webui_set_kiosk(window::Csize_t, status::Bool)::Cvoid
 end
 
 function webui_set_custom_parameters(window, params)
-    @ccall webui.webui_set_custom_parameters(window::Csize_t, params::Ptr{Cchar})::Cvoid
+    @ccall WebUI.webui_set_custom_parameters(window::Csize_t, params::Ptr{Cchar})::Cvoid
 end
 
 function webui_set_high_contrast(window, status)
-    @ccall webui.webui_set_high_contrast(window::Csize_t, status::Bool)::Cvoid
+    @ccall WebUI.webui_set_high_contrast(window::Csize_t, status::Bool)::Cvoid
 end
 
 function webui_set_resizable(window, status)
-    @ccall webui.webui_set_resizable(window::Csize_t, status::Bool)::Cvoid
+    @ccall WebUI.webui_set_resizable(window::Csize_t, status::Bool)::Cvoid
 end
 
 function webui_is_high_contrast()
-    @ccall webui.webui_is_high_contrast()::Bool
+    @ccall WebUI.webui_is_high_contrast()::Bool
 end
 
 function webui_browser_exist(browser)
-    @ccall webui.webui_browser_exist(browser::Csize_t)::Bool
+    @ccall WebUI.webui_browser_exist(browser::Csize_t)::Bool
 end
 
 function webui_wait()
-    @ccall webui.webui_wait()::Cvoid
+    @ccall WebUI.webui_wait()::Cvoid
 end
 
 function webui_wait_async()
-    @ccall webui.webui_wait_async()::Bool
+    @ccall WebUI.webui_wait_async()::Bool
 end
 
 function webui_close(window)
-    @ccall webui.webui_close(window::Csize_t)::Cvoid
+    @ccall WebUI.webui_close(window::Csize_t)::Cvoid
 end
 
 function webui_minimize(window)
-    @ccall webui.webui_minimize(window::Csize_t)::Cvoid
+    @ccall WebUI.webui_minimize(window::Csize_t)::Cvoid
 end
 
 function webui_maximize(window)
-    @ccall webui.webui_maximize(window::Csize_t)::Cvoid
+    @ccall WebUI.webui_maximize(window::Csize_t)::Cvoid
 end
 
 function webui_close_client(e)
-    @ccall webui.webui_close_client(e::Ptr{webui_event_t})::Cvoid
+    @ccall WebUI.webui_close_client(e::Ptr{webui_event_t})::Cvoid
 end
 
 function webui_destroy(window)
-    @ccall webui.webui_destroy(window::Csize_t)::Cvoid
+    @ccall WebUI.webui_destroy(window::Csize_t)::Cvoid
 end
 
 function webui_exit()
-    @ccall webui.webui_exit()::Cvoid
+    @ccall WebUI.webui_exit()::Cvoid
 end
 
 function webui_set_root_folder(window, path)
-    @ccall webui.webui_set_root_folder(window::Csize_t, path::Ptr{Cchar})::Bool
+    @ccall WebUI.webui_set_root_folder(window::Csize_t, path::Ptr{Cchar})::Bool
 end
 
 function webui_set_browser_folder(path)
-    @ccall webui.webui_set_browser_folder(path::Ptr{Cchar})::Cvoid
+    @ccall WebUI.webui_set_browser_folder(path::Ptr{Cchar})::Cvoid
 end
 
 function webui_set_default_root_folder(path)
-    @ccall webui.webui_set_default_root_folder(path::Ptr{Cchar})::Bool
+    @ccall WebUI.webui_set_default_root_folder(path::Ptr{Cchar})::Bool
 end
 
 function webui_set_close_handler_wv(window, close_handler)
-    @ccall webui.webui_set_close_handler_wv(window::Csize_t, close_handler::Ptr{Cvoid})::Cvoid
+    @ccall WebUI.webui_set_close_handler_wv(window::Csize_t, close_handler::Ptr{Cvoid})::Cvoid
 end
 
 function webui_set_file_handler(window, handler)
-    @ccall webui.webui_set_file_handler(window::Csize_t, handler::Ptr{Cvoid})::Cvoid
+    @ccall WebUI.webui_set_file_handler(window::Csize_t, handler::Ptr{Cvoid})::Cvoid
 end
 
 function webui_set_file_handler_window(window, handler)
-    @ccall webui.webui_set_file_handler_window(window::Csize_t, handler::Ptr{Cvoid})::Cvoid
+    @ccall WebUI.webui_set_file_handler_window(window::Csize_t, handler::Ptr{Cvoid})::Cvoid
 end
 
 function webui_interface_set_response_file_handler(window, response, length)
-    @ccall webui.webui_interface_set_response_file_handler(window::Csize_t, response::Ptr{Cvoid}, length::Cint)::Cvoid
+    @ccall WebUI.webui_interface_set_response_file_handler(window::Csize_t, response::Ptr{Cvoid}, length::Cint)::Cvoid
 end
 
 function webui_is_shown(window)
-    @ccall webui.webui_is_shown(window::Csize_t)::Bool
+    @ccall WebUI.webui_is_shown(window::Csize_t)::Bool
 end
 
 function webui_set_timeout(second)
-    @ccall webui.webui_set_timeout(second::Csize_t)::Cvoid
+    @ccall WebUI.webui_set_timeout(second::Csize_t)::Cvoid
 end
 
 function webui_set_icon(window, icon, icon_type)
-    @ccall webui.webui_set_icon(window::Csize_t, icon::Ptr{Cchar}, icon_type::Ptr{Cchar})::Cvoid
+    @ccall WebUI.webui_set_icon(window::Csize_t, icon::Ptr{Cchar}, icon_type::Ptr{Cchar})::Cvoid
 end
 
 function webui_encode(str)
-    @ccall webui.webui_encode(str::Ptr{Cchar})::Ptr{Cchar}
+    @ccall WebUI.webui_encode(str::Ptr{Cchar})::Ptr{Cchar}
 end
 
 function webui_decode(str)
-    @ccall webui.webui_decode(str::Ptr{Cchar})::Ptr{Cchar}
+    @ccall WebUI.webui_decode(str::Ptr{Cchar})::Ptr{Cchar}
 end
 
 function webui_free(ptr)
-    @ccall webui.webui_free(ptr::Ptr{Cvoid})::Cvoid
+    @ccall WebUI.webui_free(ptr::Ptr{Cvoid})::Cvoid
 end
 
 function webui_malloc(size)
-    @ccall webui.webui_malloc(size::Csize_t)::Ptr{Cvoid}
+    @ccall WebUI.webui_malloc(size::Csize_t)::Ptr{Cvoid}
 end
 
 function webui_memcpy(dest, src, count)
-    @ccall webui.webui_memcpy(dest::Ptr{Cvoid}, src::Ptr{Cvoid}, count::Csize_t)::Cvoid
+    @ccall WebUI.webui_memcpy(dest::Ptr{Cvoid}, src::Ptr{Cvoid}, count::Csize_t)::Cvoid
 end
 
 function webui_send_raw(window, _function, raw, size)
-    @ccall webui.webui_send_raw(window::Csize_t, _function::Ptr{Cchar}, raw::Ptr{Cvoid}, size::Csize_t)::Cvoid
+    @ccall WebUI.webui_send_raw(window::Csize_t, _function::Ptr{Cchar}, raw::Ptr{Cvoid}, size::Csize_t)::Cvoid
 end
 
 function webui_send_raw_client(e, _function, raw, size)
-    @ccall webui.webui_send_raw_client(e::Ptr{webui_event_t}, _function::Ptr{Cchar}, raw::Ptr{Cvoid}, size::Csize_t)::Cvoid
+    @ccall WebUI.webui_send_raw_client(e::Ptr{webui_event_t}, _function::Ptr{Cchar}, raw::Ptr{Cvoid}, size::Csize_t)::Cvoid
 end
 
 function webui_set_hide(window, status)
-    @ccall webui.webui_set_hide(window::Csize_t, status::Bool)::Cvoid
+    @ccall WebUI.webui_set_hide(window::Csize_t, status::Bool)::Cvoid
 end
 
 function webui_set_size(window, width, height)
-    @ccall webui.webui_set_size(window::Csize_t, width::Cuint, height::Cuint)::Cvoid
+    @ccall WebUI.webui_set_size(window::Csize_t, width::Cuint, height::Cuint)::Cvoid
 end
 
 function webui_set_minimum_size(window, width, height)
-    @ccall webui.webui_set_minimum_size(window::Csize_t, width::Cuint, height::Cuint)::Cvoid
+    @ccall WebUI.webui_set_minimum_size(window::Csize_t, width::Cuint, height::Cuint)::Cvoid
 end
 
 function webui_set_position(window, x, y)
-    @ccall webui.webui_set_position(window::Csize_t, x::Cuint, y::Cuint)::Cvoid
+    @ccall WebUI.webui_set_position(window::Csize_t, x::Cuint, y::Cuint)::Cvoid
 end
 
 function webui_set_center(window)
-    @ccall webui.webui_set_center(window::Csize_t)::Cvoid
+    @ccall WebUI.webui_set_center(window::Csize_t)::Cvoid
 end
 
 function webui_set_profile(window, name, path)
-    @ccall webui.webui_set_profile(window::Csize_t, name::Ptr{Cchar}, path::Ptr{Cchar})::Cvoid
+    @ccall WebUI.webui_set_profile(window::Csize_t, name::Ptr{Cchar}, path::Ptr{Cchar})::Cvoid
 end
 
 function webui_set_proxy(window, proxy_server)
-    @ccall webui.webui_set_proxy(window::Csize_t, proxy_server::Ptr{Cchar})::Cvoid
+    @ccall WebUI.webui_set_proxy(window::Csize_t, proxy_server::Ptr{Cchar})::Cvoid
 end
 
 function webui_get_url(window)
-    @ccall webui.webui_get_url(window::Csize_t)::Ptr{Cchar}
+    @ccall WebUI.webui_get_url(window::Csize_t)::Ptr{Cchar}
 end
 
 function webui_open_url(url)
-    @ccall webui.webui_open_url(url::Ptr{Cchar})::Cvoid
+    @ccall WebUI.webui_open_url(url::Ptr{Cchar})::Cvoid
 end
 
 function webui_set_public(window, status)
-    @ccall webui.webui_set_public(window::Csize_t, status::Bool)::Cvoid
+    @ccall WebUI.webui_set_public(window::Csize_t, status::Bool)::Cvoid
 end
 
 function webui_navigate(window, url)
-    @ccall webui.webui_navigate(window::Csize_t, url::Ptr{Cchar})::Cvoid
+    @ccall WebUI.webui_navigate(window::Csize_t, url::Ptr{Cchar})::Cvoid
 end
 
 function webui_navigate_client(e, url)
-    @ccall webui.webui_navigate_client(e::Ptr{webui_event_t}, url::Ptr{Cchar})::Cvoid
+    @ccall WebUI.webui_navigate_client(e::Ptr{webui_event_t}, url::Ptr{Cchar})::Cvoid
 end
 
 function webui_clean()
-    @ccall webui.webui_clean()::Cvoid
+    @ccall WebUI.webui_clean()::Cvoid
 end
 
 function webui_delete_all_profiles()
-    @ccall webui.webui_delete_all_profiles()::Cvoid
+    @ccall WebUI.webui_delete_all_profiles()::Cvoid
 end
 
 function webui_delete_profile(window)
-    @ccall webui.webui_delete_profile(window::Csize_t)::Cvoid
+    @ccall WebUI.webui_delete_profile(window::Csize_t)::Cvoid
 end
 
 function webui_get_parent_process_id(window)
-    @ccall webui.webui_get_parent_process_id(window::Csize_t)::Csize_t
+    @ccall WebUI.webui_get_parent_process_id(window::Csize_t)::Csize_t
 end
 
 function webui_get_child_process_id(window)
-    @ccall webui.webui_get_child_process_id(window::Csize_t)::Csize_t
+    @ccall WebUI.webui_get_child_process_id(window::Csize_t)::Csize_t
 end
 
 function webui_win32_get_hwnd(window)
-    @ccall webui.webui_win32_get_hwnd(window::Csize_t)::Ptr{Cvoid}
+    @ccall WebUI.webui_win32_get_hwnd(window::Csize_t)::Ptr{Cvoid}
 end
 
 function webui_get_hwnd(window)
-    @ccall webui.webui_get_hwnd(window::Csize_t)::Ptr{Cvoid}
+    @ccall WebUI.webui_get_hwnd(window::Csize_t)::Ptr{Cvoid}
 end
 
 function webui_get_port(window)
-    @ccall webui.webui_get_port(window::Csize_t)::Csize_t
+    @ccall WebUI.webui_get_port(window::Csize_t)::Csize_t
 end
 
 function webui_set_port(window, port)
-    @ccall webui.webui_set_port(window::Csize_t, port::Csize_t)::Bool
+    @ccall WebUI.webui_set_port(window::Csize_t, port::Csize_t)::Bool
 end
 
 function webui_get_free_port()
-    @ccall webui.webui_get_free_port()::Csize_t
+    @ccall WebUI.webui_get_free_port()::Csize_t
 end
 
 function webui_set_logger(func, user_data)
-    @ccall webui.webui_set_logger(func::Ptr{Cvoid}, user_data::Ptr{Cvoid})::Cvoid
+    @ccall WebUI.webui_set_logger(func::Ptr{Cvoid}, user_data::Ptr{Cvoid})::Cvoid
 end
 
 function webui_set_config(option, status)
-    @ccall webui.webui_set_config(option::webui_config, status::Bool)::Cvoid
+    @ccall WebUI.webui_set_config(option::webui_config, status::Bool)::Cvoid
 end
 
 function webui_set_event_blocking(window, status)
-    @ccall webui.webui_set_event_blocking(window::Csize_t, status::Bool)::Cvoid
+    @ccall WebUI.webui_set_event_blocking(window::Csize_t, status::Bool)::Cvoid
 end
 
 function webui_set_frameless(window, status)
-    @ccall webui.webui_set_frameless(window::Csize_t, status::Bool)::Cvoid
+    @ccall WebUI.webui_set_frameless(window::Csize_t, status::Bool)::Cvoid
 end
 
 function webui_set_transparent(window, status)
-    @ccall webui.webui_set_transparent(window::Csize_t, status::Bool)::Cvoid
+    @ccall WebUI.webui_set_transparent(window::Csize_t, status::Bool)::Cvoid
 end
 
 function webui_get_mime_type(file)
-    @ccall webui.webui_get_mime_type(file::Ptr{Cchar})::Ptr{Cchar}
+    @ccall WebUI.webui_get_mime_type(file::Ptr{Cchar})::Ptr{Cchar}
 end
 
 function webui_set_tls_certificate(certificate_pem, private_key_pem)
-    @ccall webui.webui_set_tls_certificate(certificate_pem::Ptr{Cchar}, private_key_pem::Ptr{Cchar})::Bool
+    @ccall WebUI.webui_set_tls_certificate(certificate_pem::Ptr{Cchar}, private_key_pem::Ptr{Cchar})::Bool
 end
 
 function webui_run(window, script)
-    @ccall webui.webui_run(window::Csize_t, script::Ptr{Cchar})::Cvoid
+    @ccall WebUI.webui_run(window::Csize_t, script::Ptr{Cchar})::Cvoid
 end
 
 function webui_run_client(e, script)
-    @ccall webui.webui_run_client(e::Ptr{webui_event_t}, script::Ptr{Cchar})::Cvoid
+    @ccall WebUI.webui_run_client(e::Ptr{webui_event_t}, script::Ptr{Cchar})::Cvoid
 end
 
 function webui_script(window, script, timeout, buffer, buffer_length)
-    @ccall webui.webui_script(window::Csize_t, script::Ptr{Cchar}, timeout::Csize_t, buffer::Ptr{Cchar}, buffer_length::Csize_t)::Bool
+    @ccall WebUI.webui_script(window::Csize_t, script::Ptr{Cchar}, timeout::Csize_t, buffer::Ptr{Cchar}, buffer_length::Csize_t)::Bool
 end
 
 function webui_script_client(e, script, timeout, buffer, buffer_length)
-    @ccall webui.webui_script_client(e::Ptr{webui_event_t}, script::Ptr{Cchar}, timeout::Csize_t, buffer::Ptr{Cchar}, buffer_length::Csize_t)::Bool
+    @ccall WebUI.webui_script_client(e::Ptr{webui_event_t}, script::Ptr{Cchar}, timeout::Csize_t, buffer::Ptr{Cchar}, buffer_length::Csize_t)::Bool
 end
 
 function webui_set_runtime(window, runtime)
-    @ccall webui.webui_set_runtime(window::Csize_t, runtime::Csize_t)::Cvoid
+    @ccall WebUI.webui_set_runtime(window::Csize_t, runtime::Csize_t)::Cvoid
 end
 
 function webui_get_count(e)
-    @ccall webui.webui_get_count(e::Ptr{webui_event_t})::Csize_t
+    @ccall WebUI.webui_get_count(e::Ptr{webui_event_t})::Csize_t
 end
 
 function webui_get_int_at(e, index)
-    @ccall webui.webui_get_int_at(e::Ptr{webui_event_t}, index::Csize_t)::Clonglong
+    @ccall WebUI.webui_get_int_at(e::Ptr{webui_event_t}, index::Csize_t)::Clonglong
 end
 
 function webui_get_int(e)
-    @ccall webui.webui_get_int(e::Ptr{webui_event_t})::Clonglong
+    @ccall WebUI.webui_get_int(e::Ptr{webui_event_t})::Clonglong
 end
 
 function webui_get_float_at(e, index)
-    @ccall webui.webui_get_float_at(e::Ptr{webui_event_t}, index::Csize_t)::Cdouble
+    @ccall WebUI.webui_get_float_at(e::Ptr{webui_event_t}, index::Csize_t)::Cdouble
 end
 
 function webui_get_float(e)
-    @ccall webui.webui_get_float(e::Ptr{webui_event_t})::Cdouble
+    @ccall WebUI.webui_get_float(e::Ptr{webui_event_t})::Cdouble
 end
 
 function webui_get_string_at(e, index)
-    @ccall webui.webui_get_string_at(e::Ptr{webui_event_t}, index::Csize_t)::Ptr{Cchar}
+    @ccall WebUI.webui_get_string_at(e::Ptr{webui_event_t}, index::Csize_t)::Ptr{Cchar}
 end
 
 function webui_get_string(e)
-    @ccall webui.webui_get_string(e::Ptr{webui_event_t})::Ptr{Cchar}
+    @ccall WebUI.webui_get_string(e::Ptr{webui_event_t})::Ptr{Cchar}
 end
 
 function webui_get_bool_at(e, index)
-    @ccall webui.webui_get_bool_at(e::Ptr{webui_event_t}, index::Csize_t)::Bool
+    @ccall WebUI.webui_get_bool_at(e::Ptr{webui_event_t}, index::Csize_t)::Bool
 end
 
 function webui_get_bool(e)
-    @ccall webui.webui_get_bool(e::Ptr{webui_event_t})::Bool
+    @ccall WebUI.webui_get_bool(e::Ptr{webui_event_t})::Bool
 end
 
 function webui_get_size_at(e, index)
-    @ccall webui.webui_get_size_at(e::Ptr{webui_event_t}, index::Csize_t)::Csize_t
+    @ccall WebUI.webui_get_size_at(e::Ptr{webui_event_t}, index::Csize_t)::Csize_t
 end
 
 function webui_get_size(e)
-    @ccall webui.webui_get_size(e::Ptr{webui_event_t})::Csize_t
+    @ccall WebUI.webui_get_size(e::Ptr{webui_event_t})::Csize_t
 end
 
 function webui_return_int(e, n)
-    @ccall webui.webui_return_int(e::Ptr{webui_event_t}, n::Clonglong)::Cvoid
+    @ccall WebUI.webui_return_int(e::Ptr{webui_event_t}, n::Clonglong)::Cvoid
 end
 
 function webui_return_float(e, f)
-    @ccall webui.webui_return_float(e::Ptr{webui_event_t}, f::Cdouble)::Cvoid
+    @ccall WebUI.webui_return_float(e::Ptr{webui_event_t}, f::Cdouble)::Cvoid
 end
 
 function webui_return_string(e, s)
-    @ccall webui.webui_return_string(e::Ptr{webui_event_t}, s::Ptr{Cchar})::Cvoid
+    @ccall WebUI.webui_return_string(e::Ptr{webui_event_t}, s::Ptr{Cchar})::Cvoid
 end
 
 function webui_return_bool(e, b)
-    @ccall webui.webui_return_bool(e::Ptr{webui_event_t}, b::Bool)::Cvoid
+    @ccall WebUI.webui_return_bool(e::Ptr{webui_event_t}, b::Bool)::Cvoid
 end
 
 # no prototype is found for this function at webui.h:1271:21, please use with caution
 function webui_get_last_error_number()
-    @ccall webui.webui_get_last_error_number()::Csize_t
+    @ccall WebUI.webui_get_last_error_number()::Csize_t
 end
 
 # no prototype is found for this function at webui.h:1278:26, please use with caution
 function webui_get_last_error_message()
-    @ccall webui.webui_get_last_error_message()::Ptr{Cchar}
+    @ccall WebUI.webui_get_last_error_message()::Ptr{Cchar}
 end
 
 function webui_interface_bind(window, element, func)
-    @ccall webui.webui_interface_bind(window::Csize_t, element::Ptr{Cchar}, func::Ptr{Cvoid})::Csize_t
+    @ccall WebUI.webui_interface_bind(window::Csize_t, element::Ptr{Cchar}, func::Ptr{Cvoid})::Csize_t
 end
 
 function webui_interface_set_response(window, event_number, response)
-    @ccall webui.webui_interface_set_response(window::Csize_t, event_number::Csize_t, response::Ptr{Cchar})::Cvoid
+    @ccall WebUI.webui_interface_set_response(window::Csize_t, event_number::Csize_t, response::Ptr{Cchar})::Cvoid
 end
 
 function webui_interface_is_app_running()
-    @ccall webui.webui_interface_is_app_running()::Bool
+    @ccall WebUI.webui_interface_is_app_running()::Bool
 end
 
 function webui_interface_get_window_id(window)
-    @ccall webui.webui_interface_get_window_id(window::Csize_t)::Csize_t
+    @ccall WebUI.webui_interface_get_window_id(window::Csize_t)::Csize_t
 end
 
 function webui_interface_get_string_at(window, event_number, index)
-    @ccall webui.webui_interface_get_string_at(window::Csize_t, event_number::Csize_t, index::Csize_t)::Ptr{Cchar}
+    @ccall WebUI.webui_interface_get_string_at(window::Csize_t, event_number::Csize_t, index::Csize_t)::Ptr{Cchar}
 end
 
 function webui_interface_get_int_at(window, event_number, index)
-    @ccall webui.webui_interface_get_int_at(window::Csize_t, event_number::Csize_t, index::Csize_t)::Clonglong
+    @ccall WebUI.webui_interface_get_int_at(window::Csize_t, event_number::Csize_t, index::Csize_t)::Clonglong
 end
 
 function webui_interface_get_float_at(window, event_number, index)
-    @ccall webui.webui_interface_get_float_at(window::Csize_t, event_number::Csize_t, index::Csize_t)::Cdouble
+    @ccall WebUI.webui_interface_get_float_at(window::Csize_t, event_number::Csize_t, index::Csize_t)::Cdouble
 end
 
 function webui_interface_get_bool_at(window, event_number, index)
-    @ccall webui.webui_interface_get_bool_at(window::Csize_t, event_number::Csize_t, index::Csize_t)::Bool
+    @ccall WebUI.webui_interface_get_bool_at(window::Csize_t, event_number::Csize_t, index::Csize_t)::Bool
 end
 
 function webui_interface_get_size_at(window, event_number, index)
-    @ccall webui.webui_interface_get_size_at(window::Csize_t, event_number::Csize_t, index::Csize_t)::Csize_t
+    @ccall WebUI.webui_interface_get_size_at(window::Csize_t, event_number::Csize_t, index::Csize_t)::Csize_t
 end
 
 function webui_interface_show_client(window, event_number, content)
-    @ccall webui.webui_interface_show_client(window::Csize_t, event_number::Csize_t, content::Ptr{Cchar})::Bool
+    @ccall WebUI.webui_interface_show_client(window::Csize_t, event_number::Csize_t, content::Ptr{Cchar})::Bool
 end
 
 function webui_interface_close_client(window, event_number)
-    @ccall webui.webui_interface_close_client(window::Csize_t, event_number::Csize_t)::Cvoid
+    @ccall WebUI.webui_interface_close_client(window::Csize_t, event_number::Csize_t)::Cvoid
 end
 
 function webui_interface_send_raw_client(window, event_number, _function, raw, size)
-    @ccall webui.webui_interface_send_raw_client(window::Csize_t, event_number::Csize_t, _function::Ptr{Cchar}, raw::Ptr{Cvoid}, size::Csize_t)::Cvoid
+    @ccall WebUI.webui_interface_send_raw_client(window::Csize_t, event_number::Csize_t, _function::Ptr{Cchar}, raw::Ptr{Cvoid}, size::Csize_t)::Cvoid
 end
 
 function webui_interface_navigate_client(window, event_number, url)
-    @ccall webui.webui_interface_navigate_client(window::Csize_t, event_number::Csize_t, url::Ptr{Cchar})::Cvoid
+    @ccall WebUI.webui_interface_navigate_client(window::Csize_t, event_number::Csize_t, url::Ptr{Cchar})::Cvoid
 end
 
 function webui_interface_run_client(window, event_number, script)
-    @ccall webui.webui_interface_run_client(window::Csize_t, event_number::Csize_t, script::Ptr{Cchar})::Cvoid
+    @ccall WebUI.webui_interface_run_client(window::Csize_t, event_number::Csize_t, script::Ptr{Cchar})::Cvoid
 end
 
 function webui_interface_script_client(window, event_number, script, timeout, buffer, buffer_length)
-    @ccall webui.webui_interface_script_client(window::Csize_t, event_number::Csize_t, script::Ptr{Cchar}, timeout::Csize_t, buffer::Ptr{Cchar}, buffer_length::Csize_t)::Bool
+    @ccall WebUI.webui_interface_script_client(window::Csize_t, event_number::Csize_t, script::Ptr{Cchar}, timeout::Csize_t, buffer::Ptr{Cchar}, buffer_length::Csize_t)::Bool
 end
 
 const WEBUI_VERSION = "2.5.0-beta.4"

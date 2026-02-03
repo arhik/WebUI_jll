@@ -6,11 +6,13 @@ description = "Julia package for WebUI library binaries using the artifact syste
 
 [deps]
 Artifacts = "56f22d72-fd6d-98f1-02f0-08ddc0907c33"
+CEnum = "fa961155-64e5-5f13-b03f-caf6b980ea82"
 Inflate = "d25df0c9-e2be-5dd7-82c8-3ad0b3e990b9"
 Libdl = "8f399da3-3557-5675-b5ff-fb832c97cbdb"
 Reexport = "189a3867-3050-52da-a836-e630ba90ab69"
 
 [compat]
+CEnum = "0.5.0"
 Inflate = "0.1.5"
 Reexport = "1.0"
 julia = "1.6.0"
