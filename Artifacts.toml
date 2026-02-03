@@ -4,8 +4,8 @@ git-tree-sha1 = "e6e6f4d9ee766e4db21a7dccbb67c271dcbc0342"
 os = "linux"
 
 	[[WebUI.download]]
-	sha256 = "772f3f543d0e1b7b41a96506bcef5ab728f0d2b4b804c110952df988d84e01b5"
-	url = "https://github.com/arhik/WebUI_jll/releases/download/v0.1.0-pre-release//webui.2.5.0-beta.3.aarch64-linux.tar.gz"
+	sha256 = "654c357026865bab2f398e1749a74bdcb333d24c86591affed94dd4400c15b1a"
+	url = "https://github.com/arhik/WebUI_jll/releases/download/v0.1.0/webui.2.5.0-beta.3.aarch64-linux.tar.gz"
 
 [[WebUI]]
 arch = "x86_64"
@@ -13,8 +13,8 @@ git-tree-sha1 = "53ee91d27fc5568c96191c06e44a9be26cae89a0"
 os = "linux"
 
 	[[WebUI.download]]
-	sha256 = "881667d10f3f2f381763dd2adc261220c84a892c813009ef6266925b86584e3e"
-	url = "https://github.com/arhik/WebUI_jll/releases/download/v0.1.0-pre-release//webui.2.5.0-beta.3.x86_64-linux.tar.gz"
+	sha256 = "a5c42677ed1586ccd2127229ca675f46577ada43371dcd5547b906c2873ae040"
+	url = "https://github.com/arhik/WebUI_jll/releases/download/v0.1.0/webui.2.5.0-beta.3.x86_64-linux.tar.gz"
 
 [[WebUI]]
 arch = "armv7l"
@@ -22,8 +22,8 @@ git-tree-sha1 = "495fef467a9126ddaa2dcf19c04f6ef8dd278afe"
 os = "linux"
 
 	[[WebUI.download]]
-	sha256 = "5903c78b843755c8217f8f0d89ef32c723aac7f7501891126234766b8615fb97"
-	url = "https://github.com/arhik/WebUI_jll/releases/download/v0.1.0-pre-release//webui.2.5.0-beta.3.armv7l-linux.tar.gz"
+	sha256 = "d80e75170083920dac62d1d60e2b0e5151578f6b29cfea0095587ac339f600ac"
+	url = "https://github.com/arhik/WebUI_jll/releases/download/v0.1.0/webui.2.5.0-beta.3.armv7l-linux.tar.gz"
 
 [[WebUI]]
 arch = "aarch64"
@@ -31,8 +31,8 @@ git-tree-sha1 = "d6f9c97d91c1e35e4232bf58d91a9c5d6ddc7c3a"
 os = "macos"
 
 	[[WebUI.download]]
-	sha256 = "51dec92764a84ece3fcfdb812cadc608ba1488e18d34d1c09ffdff96c898c235"
-	url = "https://github.com/arhik/WebUI_jll/releases/download/v0.1.0-pre-release//webui.2.5.0-beta.3.aarch64-macos.tar.gz"
+	sha256 = "cfae1f7eaa62b106aadf14d902e07097b19d42eec05938a919ffec4f07c67ddd"
+	url = "https://github.com/arhik/WebUI_jll/releases/download/v0.1.0/webui.2.5.0-beta.3.aarch64-macos.tar.gz"
 
 [[WebUI]]
 arch = "x86_64"
@@ -40,8 +40,8 @@ git-tree-sha1 = "3c18e274ab7d8cadea8a1ec9df2fb1dc4a802d66"
 os = "macos"
 
 	[[WebUI.download]]
-	sha256 = "a346e0186d89fa372f3d9e8a5cb33f8597367aef1f1d9e23aca13e3d0b7c5108"
-	url = "https://github.com/arhik/WebUI_jll/releases/download/v0.1.0-pre-release//webui.2.5.0-beta.3.x86_64-macos.tar.gz"
+	sha256 = "2305a4154c73de351e7c0b4c2418012ee4c8d7f2fe36c17333eee4f1b2db826e"
+	url = "https://github.com/arhik/WebUI_jll/releases/download/v0.1.0/webui.2.5.0-beta.3.x86_64-macos.tar.gz"
 
 [[WebUI]]
 arch = "x86_64"
@@ -49,6 +49,6 @@ git-tree-sha1 = "ceafb9614dcaa2261cd5e032286b905410587ad8"
 os = "windows"
 
 	[[WebUI.download]]
-	sha256 = "47f0c2bd48efa530616f9d808fcc357a08cad7e60af23926e59b0efcb4d350b3"
-	url = "https://github.com/arhik/WebUI_jll/releases/download/v0.1.0-pre-release//webui.2.5.0-beta.3.x86_64-windows.tar.gz"
+	sha256 = "8b5fc2c2bb354b30f1c7c8350819152a7fae0ceb0b72ccda35481e90e6fa652e"
+	url = "https://github.com/arhik/WebUI_jll/releases/download/v0.1.0/webui.2.5.0-beta.3.x86_64-windows.tar.gz"
 
