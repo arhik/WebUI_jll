@@ -142,7 +142,7 @@ WebUI_jll/
 ├── src/
 │   ├── WebUI_jll.jl      # Main module
 │   ├── LibWebUI.jl       # C API bindings
-│   └── wrapper.jl        # JLLWrappers integration
+│   └── wrapper.jl        # JLLWrappers integration (not yet)
 ├── gen/
 │   ├── artifact_downloader.jl  # Download from upstream
 │   └── package_local.jl        # Package local files
@@ -195,4 +195,4 @@ This Julia wrapper package is released under the MIT License. The WebUI library 
 
 - [WebUI Documentation](https://webui.me)
 - [Julia Artifacts Documentation](https://pkgdocs.julialang.org/v1/artifacts/)
-- [JLLWrappers.jl](https://github.com/JuliaPackaging/JLLWrappers.jl)
+- [JLLWrappers.jl](https://github.com/JuliaPackaging/JLLWrappers.jl) (not yet; working on it)

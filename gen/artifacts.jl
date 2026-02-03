@@ -34,7 +34,7 @@ function writeIO(io, arch, kernel, sha1, sha256, filename, url)
 	)
 end
 
-remoteurl = "https://github.com/JuliaBinaryWrappers/WebUI_jll.jl/releases/download/WebUI-$(upstreamVersion)+0"
+remoteurl = "https://github.com/arhik/WebUI_jll/releases/download/$(version)"
 
 function generateArtifacts()
 	for kernel in kernels
