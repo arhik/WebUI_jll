@@ -1,4 +1,4 @@
-module WGPUNative
+module WGPU_jll
 
 using Artifacts
 using Reexport
