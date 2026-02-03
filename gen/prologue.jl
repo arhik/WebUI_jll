@@ -14,3 +14,5 @@ webui_hash = artifact_hash("webui", artifact_toml)
 webuilibpath = artifact_path(webui_hash)
 resourceName = "webui-2"
 const libWebUI = "$webuilibpath/lib/$resourceName.$(Libdl.dlext)" |> normpath
+const libwebui = libWebUI
+export libWebUI

@@ -3,7 +3,10 @@ library_name = "libWebUI"
 output_file_path = "../src/LibWebUI.jl"
 module_name = "LibWebUI"
 jll_pkg_name = "WebUI_jll"
+export_symbol_prefixes = ["webui",]
+use_deterministic_symbol = true
 prologue_file_path = "./prologue.jl"
+auto_mutability = false
 output_ignorelist = [
 	"WEBUI_GET_CURRENT_DIR",
 	"WEBUI_FILE_EXIST",

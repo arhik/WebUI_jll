@@ -21,6 +21,8 @@ webui_hash = artifact_hash("webui", artifact_toml)
 webuilibpath = artifact_path(webui_hash)
 resourceName = "webui-2"
 const libWebUI = "$webuilibpath/lib/$resourceName.$(Libdl.dlext)" |> normpath
+const libwebui = libWebUI
+export libWebUI
 
 
 @cenum webui_browser::UInt32 begin
@@ -526,5 +528,13 @@ const WEBUI_MAX_IDS = UINT16_MAX
 const WEBUI_MAX_ARG = 16
 
 # Skipping MacroDefinition: WEBUI_EXPORT extern
+
+# exports
+const PREFIXES = ["webui"]
+for name in names(@__MODULE__; all=true), prefix in PREFIXES
+    if startswith(string(name), prefix)
+        @eval export $name
+    end
+end
 
 end # module
